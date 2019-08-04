@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.User;
 
+import redis.clients.jedis.Jedis;
+
 @Repository
 public class UserRepositoryImpl implements UserRepository{
 	
@@ -16,7 +18,7 @@ public class UserRepositoryImpl implements UserRepository{
 	private RedisTemplate<String, User> redisTemplate;
 
 	private HashOperations hashOperations;
-
+	
 	public UserRepositoryImpl(RedisTemplate<String, User> redisTemplate) {
 
 		this.redisTemplate = redisTemplate;
@@ -52,5 +54,45 @@ public class UserRepositoryImpl implements UserRepository{
 		hashOperations.delete("USER", id);
 		
 	}
+	
+	/*
+	 * redis style
+	 */
+//	@Autowired
+//	private Jedis redis;
+//	
+//	private int counter = 1;
+//	
+//	@Override
+//	public void save(User user) {
+//		redis.hset("USERS", Integer.toString(counter++), user.getName());
+//		
+//	}
+//
+//	@Override
+//	public Map<String, String> findAll() {
+//		
+//		return redis.hgetAll("USERS");
+//	}
+//
+//	@Override
+//	public String findById(String id) {
+//		
+//		return redis.hget("USERS", id);
+//	}
+//
+//	@Override
+//	public void update(String id,User user) {
+//		
+//		redis.hset("USERS", id, user.getName());
+//	}
+//
+//	@Override
+//	public void delete(String id) {
+//		redis.hdel("USERS", id);
+//	}
+	/*
+	 * redis style end
+	 */
 
 }
